@@ -1,16 +1,17 @@
 """
 AI News Daily - Fetch & Generate
 搜索最近24小时AI职场与工业应用新闻，调用 Gemini API 处理，生成HTML页面
-依赖：google-generativeai, duckduckgo-search, requests, beautifulsoup4
+依赖：google-genai, ddgs, requests, beautifulsoup4
 """
 
-import google.generativeai as genai
 import json
 import os
 import sys
 import subprocess
+import time
 from datetime import datetime
-from duckduckgo_search import DDGS
+from google import genai
+from ddgs import DDGS
 
 TODAY = datetime.now().strftime("%Y-%m-%d")
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "docs")
@@ -18,11 +19,11 @@ OUTPUT_HTML = os.path.join(OUTPUT_DIR, f"ai-news-{TODAY}.html")
 GENERATE_SCRIPT = os.path.join(os.path.dirname(__file__), "generate_page.py")
 
 SEARCH_QUERIES = [
-    "AI enterprise deployment workplace automation 2026",
-    "artificial intelligence manufacturing industrial application 2026",
-    "AI healthcare logistics supply chain 2026",
-    "enterprise AI agent launch product 2026",
-    "AI workplace productivity tool enterprise 2026",
+    "AI enterprise workplace deployment 2026",
+    "artificial intelligence manufacturing industrial 2026",
+    "AI healthcare supply chain automation 2026",
+    "enterprise AI agent product launch 2026",
+    "AI productivity tool enterprise 2026",
 ]
 
 FILTER_PROMPT = """你是一名专业的AI行业新闻编辑。下面是一批从搜索引擎收集的候选新闻摘要。
@@ -53,7 +54,9 @@ def search_news():
     results = []
     seen_urls = set()
     with DDGS() as ddgs:
-        for query in SEARCH_QUERIES:
+        for i, query in enumerate(SEARCH_QUERIES):
+            if i > 0:
+                time.sleep(2)  # 避免被限速
             try:
                 hits = list(ddgs.news(query, max_results=8, timelimit="d"))
                 for h in hits:
@@ -86,14 +89,16 @@ def format_candidates(raw_news):
 
 
 def process_with_gemini(raw_news):
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     candidates_text = format_candidates(raw_news)
     prompt = FILTER_PROMPT.format(candidates=candidates_text)
 
     print("调用 Gemini API 处理新闻...")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt,
+    )
     raw_output = response.text.strip()
 
     # 容错：去除可能的 markdown 代码块
@@ -169,7 +174,7 @@ def update_index():
 
     with open(index_path, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"index.html 已更新")
+    print("index.html 已更新")
 
 
 def main():
