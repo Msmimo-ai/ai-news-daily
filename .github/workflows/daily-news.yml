@@ -24,11 +24,11 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic duckduckgo-search requests beautifulsoup4
+        run: pip install google-generativeai duckduckgo-search requests beautifulsoup4
 
       - name: Generate news page
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PYTHONUTF8: "1"
         run: python scripts/fetch_news.py
 
