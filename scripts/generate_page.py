@@ -52,6 +52,10 @@ def render_tags(tags):
     return "".join(parts)
 
 def render_card(item, index):
+    card_type = item.get("type", "news")
+    if card_type == "tutorial":
+        return render_tutorial_card(item)
+
     importance = item.get("importance", "中")
     accent = IMPORTANCE_COLORS.get(importance, "#3b82f6")
     tags_html = render_tags(item.get("tags", []))
@@ -85,6 +89,46 @@ def render_card(item, index):
             <a class="btn-translate" href="{translate_url}" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
             <a class="btn-original" href="{url}" target="_blank" onclick="event.stopPropagation()">原文</a>
           </div>
+        </div>
+      </div>
+    </article>"""
+
+
+def render_tutorial_card(item):
+    title = item.get("title_zh", "本期实操课题")
+    summary = item.get("summary", "")
+    steps = item.get("steps", [])
+    url = item.get("url", "https://copilot.microsoft.com")
+    tags_html = render_tags(item.get("tags", ["Copilot实操", "工程师必学"]))
+
+    steps_html = "".join(
+        f'<li class="step-item"><span class="step-num">{i+1}</span><span class="step-text">{s}</span></li>'
+        for i, s in enumerate(steps)
+    )
+
+    return f"""
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">{title}</h2>
+        <div class="card-tags">{tags_html}</div>
+        <p class="card-summary">{summary}</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共{len(steps)}步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            {steps_html}
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="{url}" target="_blank" style="background:#7c3aed">开始实操 →</a>
         </div>
       </div>
     </article>"""
@@ -348,6 +392,71 @@ def generate_html(news_items, date_str, generated_at):
 
   .btn-original:hover {{ color: var(--text); }}
 
+  /* 实操课题卡片 */
+  .tutorial-card {{ border: 2px solid #7c3aed40; }}
+
+  .steps-section {{ margin-top: 14px; }}
+
+  .steps-header {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }}
+
+  .steps-header:hover {{ background: #7c3aed20; }}
+
+  .chevron {{ transition: transform 0.2s; font-size: 10px; }}
+  .chevron.open {{ transform: rotate(180deg); }}
+
+  .steps-list {{
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }}
+
+  .steps-list.open {{ display: flex; }}
+
+  .step-item {{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }}
+
+  .step-num {{
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }}
+
+  .step-text {{ flex: 1; }}
+
   .footer {{
     text-align: center;
     font-size: 11px;
@@ -390,6 +499,14 @@ def generate_html(news_items, date_str, generated_at):
   <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
 </div>
 
+<script>
+  function toggleSteps(header) {{
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }}
+</script>
 </body>
 </html>"""
 
