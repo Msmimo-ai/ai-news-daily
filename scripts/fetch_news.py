@@ -10,7 +10,7 @@ import sys
 import subprocess
 import time
 from datetime import datetime, timezone, timedelta
-from google import genai
+from groq import Groq
 import feedparser
 import requests
 
@@ -122,17 +122,18 @@ def format_candidates(raw_news):
     return "\n\n".join(lines)
 
 
-def process_with_gemini(raw_news):
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+def process_with_groq(raw_news):
+    client = Groq(api_key=os.environ["GROQ_API_KEY"])
     candidates_text = format_candidates(raw_news)
     prompt = FILTER_PROMPT.format(candidates=candidates_text)
 
-    print("调用 Gemini API 处理新闻...")
-    response = client.models.generate_content(
-        model="gemini-2.0-flash-lite",  # 免费配额最宽松的模型
-        contents=prompt,
+    print("调用 Groq API 处理新闻...")
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
     )
-    raw_output = response.text.strip()
+    raw_output = response.choices[0].message.content.strip()
 
     # 去除可能的 markdown 代码块标记
     if raw_output.startswith("```"):
@@ -202,8 +203,8 @@ def update_index():
 
 def main():
     print(f"=== AI News Daily {TODAY} ===")
-    if not os.environ.get("GEMINI_API_KEY"):
-        print("ERROR: 未设置 GEMINI_API_KEY", file=sys.stderr)
+    if not os.environ.get("GROQ_API_KEY"):
+        print("ERROR: 未设置 GROQ_API_KEY", file=sys.stderr)
         sys.exit(1)
 
     print("抓取 RSS 新闻源...")
@@ -212,7 +213,7 @@ def main():
         print("ERROR: 未抓取到任何新闻", file=sys.stderr)
         sys.exit(1)
 
-    news_items = process_with_gemini(raw_news)
+    news_items = process_with_groq(raw_news)
     generate_html(news_items)
     update_index()
     print(f"完成！{OUTPUT_HTML}")
