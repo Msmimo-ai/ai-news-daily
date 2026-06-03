@@ -253,6 +253,71 @@
 
   .btn-original:hover { color: var(--text); }
 
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
   .footer {
     text-align: center;
     font-size: 11px;
@@ -281,11 +346,31 @@
   </div>
   <div class="update-bar">
     <div class="update-dot"></div>
-    <span>AI 职场与工业应用 · 更新于 02:57</span>
+    <span>AI 职场与工业应用 · 更新于 03:01</span>
   </div>
 </header>
 
 <main>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">微软推出新工具</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">微软推出了一种新工具，允许开发人员使用文本描述生成AI行为测试。这种工具名为Adaptive Spec-driven Scoring for Evaluation and Regression Testing，目前已开放源代码。它可以帮助开发人员更好地测试和评估AI模型的行为，提高AI应用的安全性和可靠性。这种工具的推出表明了微软在AI领域的持续投入和创新，可能会对AI的开发和应用产生积极影响。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-02</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/02/new-microsoft-tool-lets-devs-spin-up-ai-behavior-tests-using-text-descriptions/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/06/02/new-microsoft-tool-lets-devs-spin-up-ai-behavior-tests-using-text-descriptions/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
 
     <article class="card" style="--accent:#3b82f6">
       <div class="card-accent-bar" style="background:#3b82f6"></div>
@@ -295,8 +380,8 @@
           
         </div>
         <h2 class="card-title">Uber限制员工AI支出</h2>
-        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span></div>
-        <p class="card-summary">Uber公司由于员工过度使用AI导致预算在四个月内就被耗尽，因此对员工的AI支出进行了限制。这种限制表明企业需要合理控制AI的使用以避免不必要的开支。Uber的做法可能会为其他企业提供参考，帮助他们更好地管理AI资源。</p>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">Uber最近限制了员工使用AI的支出，因为公司在四个月内就超出了预算。这种限制可能会影响Uber的AI项目和创新，但也反映了公司对成本控制和资源优化的关注。Uber的AI应用包括自动驾驶、客户服务等方面，限制AI支出可能会对这些项目的发展产生一定影响。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
@@ -314,29 +399,9 @@
           <span class="card-source">TechCrunch</span>
           <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
         </div>
-        <h2 class="card-title">Microsoft推出Scout AI助手</h2>
-        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI助手</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Microsoft</span></div>
-        <p class="card-summary">Microsoft推出了Scout，一款基于OpenClaw的AI个人助手，能够集成到Microsoft 365应用中，帮助用户提高工作效率。Scout可以帮助用户管理日程、发送邮件和完成其他任务，标志着Microsoft在AI助手领域的重大进步。</p>
-        <div class="card-footer">
-          <span class="pub-date">2026-06-02</span>
-          <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/02/microsoft-launches-scout-an-openclaw-inspired-personal-assistant/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://techcrunch.com/2026/06/02/microsoft-launches-scout-an-openclaw-inspired-personal-assistant/" target="_blank" onclick="event.stopPropagation()">原文</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" style="--accent:#3b82f6">
-      <div class="card-accent-bar" style="background:#3b82f6"></div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-source">TechCrunch</span>
-          
-        </div>
-        <h2 class="card-title">Google推出假呼叫检测功能</h2>
-        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Google</span></div>
-        <p class="card-summary">Google推出了假呼叫检测功能，能够帮助用户避免AI深度伪造诈骗。这种功能可以检测出使用AI技术模拟真实电话的诈骗呼叫，进一步提高用户的安全性。</p>
+        <h2 class="card-title">谷歌推出假电话检测</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">谷歌推出了一个新功能，用于检测和防止AI深度伪造电话诈骗。这种功能可以帮助保护用户免受诈骗和骚扰电话的侵害，提高电话使用的安全性和可靠性。谷歌的这一举动表明了其在AI安全和隐私保护方面的持续努力和投入。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
@@ -354,9 +419,49 @@
           <span class="card-source">TechCrunch</span>
           <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
         </div>
-        <h2 class="card-title">OpenAI推出Codex工具</h2>
-        <div class="card-tags"><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">OpenAI</span></div>
-        <p class="card-summary">OpenAI推出了Codex工具，包括六个针对不同职位的插件，能够帮助用户提高工作效率。这些工具可以应用于数据分析、创意生产、销售、产品设计等领域，标志着OpenAI在AI应用领域的重大进步。</p>
+        <h2 class="card-title">微软推出Scout助手</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">微软推出了一个名为Scout的新AI助手，基于OpenClaw技术。Scout可以集成到Microsoft 365应用中，提供虚拟助手服务，帮助用户提高工作效率和生产力。Scout的推出表明了微软在AI助手和办公自动化方面的持续创新和投入。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-02</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/02/microsoft-launches-scout-an-openclaw-inspired-personal-assistant/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/06/02/microsoft-launches-scout-an-openclaw-inspired-personal-assistant/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">特朗普签署AI监管令</h2>
+        <div class="card-tags"><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">特朗普签署了一项行政令，要求AI公司在发布新模型前进行自愿审查。这种措施旨在提高AI应用的安全性和可靠性，但也可能会对AI的发展和创新产生一定影响。特朗普的这一举动表明了政府在AI监管和安全方面的关注和投入。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-02</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/02/trump-signs-narrower-executive-order-on-ai-oversight-after-industry-objections/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/06/02/trump-signs-narrower-executive-order-on-ai-oversight-after-industry-objections/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">OpenAI推出新工具</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">OpenAI推出了一个名为Codex的新工具，提供六个插件，用于数据分析、创意生产、销售、产品设计、股权投资和投资银行等领域。这些工具可以帮助用户提高工作效率和生产力，推动AI在各个行业的应用和创新。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
@@ -374,14 +479,14 @@
           <span class="card-source">The Verge</span>
           <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
         </div>
-        <h2 class="card-title">Trump签署AI监管行政令</h2>
-        <div class="card-tags"><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI安全</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Trump</span></div>
-        <p class="card-summary">Trump签署了一份行政令，要求AI公司在发布模型之前自愿与政府分享其前沿模型，以促进安全创新和加强网络安全。这种行政令可能会对AI行业产生重大影响，提高AI模型的安全性和透明度。</p>
+        <h2 class="card-title">微软推出MAI-Thinking-1</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">微软推出了一个名为MAI-Thinking-1的新AI模型，具有推理和问题解决能力。这种模型可以帮助用户提高工作效率和生产力，推动AI在各个行业的应用和创新。MAI-Thinking-1的推出表明了微软在AI研究和开发方面的持续投入和创新。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/policy/941775/trump-ai-executive-order" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://www.theverge.com/policy/941775/trump-ai-executive-order" target="_blank" onclick="event.stopPropagation()">原文</a>
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026" target="_blank" onclick="event.stopPropagation()">原文</a>
           </div>
         </div>
       </div>
@@ -394,49 +499,9 @@
           <span class="card-source">The Verge</span>
           <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
         </div>
-        <h2 class="card-title">Microsoft推出MAI-Thinking-1模型</h2>
-        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI研究</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Microsoft</span></div>
-        <p class="card-summary">Microsoft推出了MAI-Thinking-1模型，一种高级推理AI模型，能够帮助用户提高工作效率和决策能力。这种模型标志着Microsoft在AI研究领域的重大进步，可能会在各个行业中得到广泛应用。</p>
-        <div class="card-footer">
-          <span class="pub-date">2026-06-02</span>
-          <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026" target="_blank" onclick="event.stopPropagation()">原文</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" style="--accent:#3b82f6">
-      <div class="card-accent-bar" style="background:#3b82f6"></div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-source">The Verge</span>
-          
-        </div>
-        <h2 class="card-title">Microsoft推出Project Solara</h2>
-        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI操作系统</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Microsoft</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Project Solara</span></div>
-        <p class="card-summary">Microsoft推出了Project Solara，一种为AI代理设备设计的操作系统。这种操作系统能够帮助用户更好地管理AI代理设备，提高工作效率和安全性，标志着Microsoft在AI领域的重大进步。</p>
-        <div class="card-footer">
-          <span class="pub-date">2026-06-02</span>
-          <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/news/941830/microsoft-project-solara-os-ai-agent-gadgets" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://www.theverge.com/news/941830/microsoft-project-solara-os-ai-agent-gadgets" target="_blank" onclick="event.stopPropagation()">原文</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" style="--accent:#3b82f6">
-      <div class="card-accent-bar" style="background:#3b82f6"></div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-source">The Verge</span>
-          
-        </div>
-        <h2 class="card-title">Google Phone应用推出假呼叫检测功能</h2>
-        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Google</span></div>
-        <p class="card-summary">Google Phone应用推出了假呼叫检测功能，能够帮助用户避免AI深度伪造诈骗。这种功能可以检测出使用AI技术模拟真实电话的诈骗呼叫，进一步提高用户的安全性。</p>
+        <h2 class="card-title">谷歌推出电话诈骗检测</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">谷歌推出了一个新功能，用于检测和防止AI深度伪造电话诈骗。这种功能可以帮助保护用户免受诈骗和骚扰电话的侵害，提高电话使用的安全性和可靠性。谷歌的这一举动表明了其在AI安全和隐私保护方面的持续努力和投入。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
@@ -447,42 +512,48 @@
       </div>
     </article>
 
-    <article class="card" style="--accent:#3b82f6">
-      <div class="card-accent-bar" style="background:#3b82f6"></div>
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
       <div class="card-body">
         <div class="card-meta">
           <span class="card-source">The Verge</span>
-          
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
         </div>
-        <h2 class="card-title">Microsoft Build 2026大会</h2>
-        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Microsoft</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI研究</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span></div>
-        <p class="card-summary">Microsoft Build 2026大会上，Microsoft推出了多项新产品和技术，包括Scout AI助手、MAI-Thinking-1模型和Project Solara操作系统。这些产品和技术标志着Microsoft在AI领域的重大进步，可能会在各个行业中得到广泛应用。</p>
+        <h2 class="card-title">微软推出Project Solara</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">微软推出了一个名为Project Solara的新操作系统，用于AI代理设备。Project Solara可以帮助用户提高工作效率和生产力，推动AI在各个行业的应用和创新。Project Solara的推出表明了微软在AI研究和开发方面的持续投入和创新。</p>
         <div class="card-footer">
           <span class="pub-date">2026-06-02</span>
           <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/941668/microsoft-build-may-2026-live-news-updates" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://www.theverge.com/tech/941668/microsoft-build-may-2026-live-news-updates" target="_blank" onclick="event.stopPropagation()">原文</a>
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/news/941830/microsoft-project-solara-os-ai-agent-gadgets" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/news/941830/microsoft-project-solara-os-ai-agent-gadgets" target="_blank" onclick="event.stopPropagation()">原文</a>
           </div>
         </div>
       </div>
     </article>
 
-    <article class="card" style="--accent:#3b82f6">
-      <div class="card-accent-bar" style="background:#3b82f6"></div>
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
       <div class="card-body">
         <div class="card-meta">
-          <span class="card-source">MIT Technology Review</span>
-          
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
         </div>
-        <h2 class="card-title">小企业如何利用AI</h2>
-        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">小企业</span></div>
-        <p class="card-summary">小企业可以通过利用AI提高工作效率和竞争力。AI可以应用于会计、设计、市场研究和产品开发等领域，帮助小企业更好地管理资源和提高生产力。</p>
-        <div class="card-footer">
-          <span class="pub-date">2026-06-02</span>
-          <div class="card-links">
-            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/06/02/1138277/the-download-ai-tips-small-businesses-admin/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
-            <a class="btn-original" href="https://www.technologyreview.com/2026/06/02/1138277/the-download-ai-tips-small-businesses-admin/" target="_blank" onclick="event.stopPropagation()">原文</a>
+        <h2 class="card-title">用Copilot生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot实操</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">工程师必学</span></div>
+        <p class="card-summary">本教程将指导您使用Microsoft Copilot生成设备异常分析报告。Copilot可以帮助您提高工作效率和生产力，推动AI在各个行业的应用和创新。通过本教程，您将学会如何使用Copilot生成设备异常分析报告，提高设备维护和管理的效率。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共6步）</span>
+            <span class="chevron">▼</span>
           </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第1步：打开Microsoft Copilot，选择设备异常分析报告模板</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第2步：输入设备信息和异常数据，选择分析参数</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第3步：点击生成报告，等待Copilot处理数据</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第4步：查看生成的报告，分析设备异常原因</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第5步：根据报告结果，制定设备维护和管理计划</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第6步：保存和分享报告，用于设备维护和管理参考</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
         </div>
       </div>
     </article>
@@ -494,5 +565,13 @@
   <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
 </div>
 
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
 </body>
 </html>
