@@ -1,0 +1,41 @@
+name: AI News Daily
+
+on:
+  schedule:
+    # 每天 22:00 UTC = 北京时间 06:00（UTC+8）
+    - cron: '0 22 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic duckduckgo-search requests beautifulsoup4
+
+      - name: Generate news page
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PYTHONUTF8: "1"
+        run: python scripts/fetch_news.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "AI News Bot"
+          git config user.email "actions@github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "📰 AI 新闻日报 $(date +%Y-%m-%d)"
+          git push

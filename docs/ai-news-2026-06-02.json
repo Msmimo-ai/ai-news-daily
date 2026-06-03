@@ -1,0 +1,92 @@
+[
+  {
+    "title_zh": "微软 Build 2026：发布自研编程 AI 模型，剑指 OpenAI 替代",
+    "summary": "微软在今日举行的 Build 2026 大会发布首款自研编程模型 MAI-Code-1-Flash，可将文字描述直接转化为源代码，已集成至 GitHub Copilot 和 VS Code。同步发布推理模型 MAI-Thinking-1，主打「推理超高效」。此举标志微软正式减少对 OpenAI 的依赖，在代码生成赛道与 Anthropic、Google 展开正面竞争。",
+    "tags": ["代码生成", "智能办公", "大模型应用"],
+    "importance": "高",
+    "source": "CNBC",
+    "pub_time": "2026-06-02",
+    "url": "https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html"
+  },
+  {
+    "title_zh": "Anthropic 与 OpenAI 同步成立企业 AI 合资公司，合计融资逾 55 亿美元",
+    "summary": "两大 AI 巨头于5月同步设立企业 AI 服务合资公司。Anthropic 估值 15 亿美元，与 Blackstone、Goldman Sachs 等机构合作，派驻工程师嵌入客户内部定制 AI 工作流；OpenAI 规模更大，目标融资 40 亿美元，19 家投资方包括 TPG、Bain Capital，两家公司均瞄准中大型企业的 AI 落地服务市场。",
+    "tags": ["大模型应用", "政策监管"],
+    "importance": "高",
+    "source": "TechCrunch",
+    "pub_time": "2026-05-04",
+    "url": "https://techcrunch.com/2026/05/04/anthropic-and-openai-are-both-launching-joint-ventures-for-enterprise-ai-services/"
+  },
+  {
+    "title_zh": "IBM Think 2026：Providence 医院 HR AI 上线，招聘耗时减少 90%",
+    "summary": "IBM 在 Think 2026 大会发布企业优势平台增强版，包括将遗留工作流转化为 AI 代理的 Process Studio。标杆案例：Providence 医疗系统（逾 30 家医院）部署 HR AI 代理后，招聘环节耗时减少 90%，岗位请求准确率提升 70%，护工调配平均提前 12 天，员工转岗成本下降 60%。IBM 预测客户可实现 25% 运营成本削减。",
+    "tags": ["医疗AI", "人力资源"],
+    "importance": "高",
+    "source": "IBM Newsroom",
+    "pub_time": "2026-05-06",
+    "url": "https://newsroom.ibm.com/2026-05-06-ibm-consulting-expands-ai-capabilities-to-accelerate-enterprise-transformation"
+  },
+  {
+    "title_zh": "Nvidia 推企业 AI 代理工具包，Adobe、SAP、西门子等 17 家巨头首批采用",
+    "summary": "Nvidia 在 GTC 2026 发布企业 AI 代理工具包（Agent Toolkit），Adobe、Salesforce、SAP、ServiceNow、西门子、CrowdStrike、Atlassian、Palantir 等 17 家头部软件公司承诺基于此平台构建下一代 AI 产品。该工具包旨在为跨企业系统的 AI 代理提供统一基础设施，覆盖设计、制造、安全、ERP 等核心场景。",
+    "tags": ["大模型应用", "制造业", "安全合规"],
+    "importance": "高",
+    "source": "VentureBeat",
+    "pub_time": "2026-03",
+    "url": "https://venturebeat.com/technology/nvidia-launches-enterprise-ai-agent-platform-with-adobe-salesforce-sap-among"
+  },
+  {
+    "title_zh": "Google Chrome 变身 AI 职场助手，新增影子 IT 风险检测",
+    "summary": "Google 宣布将 Gemini 驱动的「自动浏览」功能引入 Chrome 企业版，支持订机票、数据录入、会议安排等日常操作，并保留人工审核关卡。新增「影子 IT 风险检测」功能，可识别员工私自使用的未授权 AI 工具和 SaaS 应用，目前向美国 Workspace 企业用户开放策略启用。",
+    "tags": ["智能办公", "安全合规"],
+    "importance": "中",
+    "source": "TechCrunch",
+    "pub_time": "2026-04-22",
+    "url": "https://techcrunch.com/2026/04/22/google-turns-chrome-into-an-ai-coworker-for-the-workplace/"
+  },
+  {
+    "title_zh": "Microsoft Agent 365 正式发布，统一管控企业 AI 代理",
+    "summary": "Microsoft 将 Agent 365 从预览版转为正式发布。6月将扩展至 18 种 AI 代理类型，包括 GitHub Copilot CLI 和 Claude Code。新功能包括上下文映射、基于策略的访问控制及运行时阻断，通过 Intune 和 Defender 统一管理，直接回应企业对「影子 AI」失控的担忧。",
+    "tags": ["智能办公", "安全合规"],
+    "importance": "中",
+    "source": "VentureBeat",
+    "pub_time": "2026-06",
+    "url": "https://venturebeat.com/technology/microsoft-takes-agent-365-out-of-preview-as-shadow-ai-becomes-an-enterprise-threat"
+  },
+  {
+    "title_zh": "Salesforce Agentforce 企业客户突破 18500 家，单季新增 6000",
+    "summary": "尽管外界热议 AI 泡沫，Salesforce 的 AI 代理平台 Agentforce 在最近一个季度新增 6000 家企业客户，总数达 18500 家。Gartner 预测，到 2026 年底将有 40% 企业应用内置特定任务 AI 代理，相比当前不足 5% 的比例大幅跃升，印证企业级 AI 正在加速从试点走向规模化部署。",
+    "tags": ["大模型应用", "智能办公"],
+    "importance": "中",
+    "source": "VentureBeat",
+    "pub_time": "2026-06",
+    "url": "https://venturebeat.com/technology/while-everyone-talks-about-an-ai-bubble-salesforce-quietly-added-6-000"
+  },
+  {
+    "title_zh": "全球制造业 AI 采用率升至 47%，但仅两成企业做好规模化准备",
+    "summary": "2026年全球智能制造 AI 采用率达 47%（同比+12%），AI系统为制造企业带来平均 31% 效率提升，计划外停机减少 43%，协作机器人市场规模达 113 亿美元（年增 28%）。然而报告同时指出，98% 的制造商虽在探索 AI，仅 20% 认为已做好大规模应用准备，显示落地鸿沟依然显著。",
+    "tags": ["制造业", "机器人"],
+    "importance": "中",
+    "source": "Redwood Research",
+    "pub_time": "2026-06",
+    "url": "https://www.redwood.com/press-releases/manufacturing-ai-and-automation-outlook-2026-98-of-manufacturers-exploring-ai-but-only-20-fully-prepared/"
+  },
+  {
+    "title_zh": "Intermountain Healthcare 跨 30 家医院部署 AI 供应链，储存成本降低 40-50%",
+    "summary": "Intermountain Healthcare 在逾 30 家医院实施 AI 医疗供应链系统，实时监控物资消耗、动态计算补货时间点并优化院间调配。行业报告指出 2026 年是医疗供应链 AI 的「拐点之年」，从概念验证迈向规模落地，可将储存与接收成本降低 40-50%，并实现从被动响应到预测性管理的转变。",
+    "tags": ["医疗AI", "供应链"],
+    "importance": "中",
+    "source": "MedCity News",
+    "pub_time": "2026-04",
+    "url": "https://medcitynews.com/2026/04/clinical-supply-chain-hits-its-ai-turning-point/"
+  },
+  {
+    "title_zh": "Google 与微软正面交锋 AI 编程赛道，开发者订阅百元起",
+    "summary": "Google 发布 Gemini 3.5 Flash 编程模型，推出 100 美元/月开发者订阅层级，主打性价比；微软今日 Build 2026 同步推出 MAI-Code-1-Flash，整合至 GitHub Copilot 和 VS Code，两者均意在打破 OpenAI 与 Anthropic 在代码生成领域的垄断，AI 编程工具的企业采购成本有望进一步下降。",
+    "tags": ["代码生成", "大模型应用"],
+    "importance": "中",
+    "source": "CNBC",
+    "pub_time": "2026-06-01",
+    "url": "https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html"
+  }
+]

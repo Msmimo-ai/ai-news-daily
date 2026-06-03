@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-06-02</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-06-02">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar {
+    height: 3px;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 14px 16px 16px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .read-more {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3b82f6;
+    letter-spacing: 0.3px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  #refresh-banner {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 200;
+    white-space: nowrap;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+    to  { transform: translateX(-50%) translateY(0);   opacity: 1; }
+  }
+
+  @media (min-width: 520px) {
+    main { padding: 20px 16px; gap: 14px; }
+    .card-title { font-size: 16px; }
+    .card-summary { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-06-02</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 21:51</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#ef4444" onclick="window.open('https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html','_blank')">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">CNBC · 2026-06-02</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">微软 Build 2026：发布自研编程 AI 模型，剑指 OpenAI 替代</h2>
+        <div class="card-tags"><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span></div>
+        <p class="card-summary">微软在今日举行的 Build 2026 大会发布首款自研编程模型 MAI-Code-1-Flash，可将文字描述直接转化为源代码，已集成至 GitHub Copilot 和 VS Code。同步发布推理模型 MAI-Thinking-1，主打「推理超高效」。此举标志微软正式减少对 OpenAI 的依赖，在代码生成赛道与 Anthropic、Google 展开正面竞争。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444" onclick="window.open('https://techcrunch.com/2026/05/04/anthropic-and-openai-are-both-launching-joint-ventures-for-enterprise-ai-services/','_blank')">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch · 2026-05-04</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Anthropic 与 OpenAI 同步成立企业 AI 合资公司，合计融资逾 55 亿美元</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span></div>
+        <p class="card-summary">两大 AI 巨头于5月同步设立企业 AI 服务合资公司。Anthropic 估值 15 亿美元，与 Blackstone、Goldman Sachs 等机构合作，派驻工程师嵌入客户内部定制 AI 工作流；OpenAI 规模更大，目标融资 40 亿美元，19 家投资方包括 TPG、Bain Capital，两家公司均瞄准中大型企业的 AI 落地服务市场。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444" onclick="window.open('https://newsroom.ibm.com/2026-05-06-ibm-consulting-expands-ai-capabilities-to-accelerate-enterprise-transformation','_blank')">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">IBM Newsroom · 2026-05-06</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">IBM Think 2026：Providence 医院 HR AI 上线，招聘耗时减少 90%</h2>
+        <div class="card-tags"><span class="tag" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">医疗AI</span><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span></div>
+        <p class="card-summary">IBM 在 Think 2026 大会发布企业优势平台增强版，包括将遗留工作流转化为 AI 代理的 Process Studio。标杆案例：Providence 医疗系统（逾 30 家医院）部署 HR AI 代理后，招聘环节耗时减少 90%，岗位请求准确率提升 70%，护工调配平均提前 12 天，员工转岗成本下降 60%。IBM 预测客户可实现 25% 运营成本削减。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444" onclick="window.open('https://venturebeat.com/technology/nvidia-launches-enterprise-ai-agent-platform-with-adobe-salesforce-sap-among','_blank')">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">VentureBeat · 2026-03</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Nvidia 推企业 AI 代理工具包，Adobe、SAP、西门子等 17 家巨头首批采用</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Nvidia 在 GTC 2026 发布企业 AI 代理工具包（Agent Toolkit），Adobe、Salesforce、SAP、ServiceNow、西门子、CrowdStrike、Atlassian、Palantir 等 17 家头部软件公司承诺基于此平台构建下一代 AI 产品。该工具包旨在为跨企业系统的 AI 代理提供统一基础设施，覆盖设计、制造、安全、ERP 等核心场景。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://techcrunch.com/2026/04/22/google-turns-chrome-into-an-ai-coworker-for-the-workplace/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch · 2026-04-22</span>
+          
+        </div>
+        <h2 class="card-title">Google Chrome 变身 AI 职场助手，新增影子 IT 风险检测</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Google 宣布将 Gemini 驱动的「自动浏览」功能引入 Chrome 企业版，支持订机票、数据录入、会议安排等日常操作，并保留人工审核关卡。新增「影子 IT 风险检测」功能，可识别员工私自使用的未授权 AI 工具和 SaaS 应用，目前向美国 Workspace 企业用户开放策略启用。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://venturebeat.com/technology/microsoft-takes-agent-365-out-of-preview-as-shadow-ai-becomes-an-enterprise-threat','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">VentureBeat · 2026-06</span>
+          
+        </div>
+        <h2 class="card-title">Microsoft Agent 365 正式发布，统一管控企业 AI 代理</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Microsoft 将 Agent 365 从预览版转为正式发布。6月将扩展至 18 种 AI 代理类型，包括 GitHub Copilot CLI 和 Claude Code。新功能包括上下文映射、基于策略的访问控制及运行时阻断，通过 Intune 和 Defender 统一管理，直接回应企业对「影子 AI」失控的担忧。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://venturebeat.com/technology/while-everyone-talks-about-an-ai-bubble-salesforce-quietly-added-6-000','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">VentureBeat · 2026-06</span>
+          
+        </div>
+        <h2 class="card-title">Salesforce Agentforce 企业客户突破 18500 家，单季新增 6000</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">尽管外界热议 AI 泡沫，Salesforce 的 AI 代理平台 Agentforce 在最近一个季度新增 6000 家企业客户，总数达 18500 家。Gartner 预测，到 2026 年底将有 40% 企业应用内置特定任务 AI 代理，相比当前不足 5% 的比例大幅跃升，印证企业级 AI 正在加速从试点走向规模化部署。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.redwood.com/press-releases/manufacturing-ai-and-automation-outlook-2026-98-of-manufacturers-exploring-ai-but-only-20-fully-prepared/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">Redwood Research · 2026-06</span>
+          
+        </div>
+        <h2 class="card-title">全球制造业 AI 采用率升至 47%，但仅两成企业做好规模化准备</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#f9731620;color:#f97316;border:1px solid #f9731640">机器人</span></div>
+        <p class="card-summary">2026年全球智能制造 AI 采用率达 47%（同比+12%），AI系统为制造企业带来平均 31% 效率提升，计划外停机减少 43%，协作机器人市场规模达 113 亿美元（年增 28%）。然而报告同时指出，98% 的制造商虽在探索 AI，仅 20% 认为已做好大规模应用准备，显示落地鸿沟依然显著。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://medcitynews.com/2026/04/clinical-supply-chain-hits-its-ai-turning-point/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MedCity News · 2026-04</span>
+          
+        </div>
+        <h2 class="card-title">Intermountain Healthcare 跨 30 家医院部署 AI 供应链，储存成本降低 40-50%</h2>
+        <div class="card-tags"><span class="tag" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">医疗AI</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">Intermountain Healthcare 在逾 30 家医院实施 AI 医疗供应链系统，实时监控物资消耗、动态计算补货时间点并优化院间调配。行业报告指出 2026 年是医疗供应链 AI 的「拐点之年」，从概念验证迈向规模落地，可将储存与接收成本降低 40-50%，并实现从被动响应到预测性管理的转变。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">CNBC · 2026-06-01</span>
+          
+        </div>
+        <h2 class="card-title">Google 与微软正面交锋 AI 编程赛道，开发者订阅百元起</h2>
+        <div class="card-tags"><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span></div>
+        <p class="card-summary">Google 发布 Gemini 3.5 Flash 编程模型，推出 100 美元/月开发者订阅层级，主打性价比；微软今日 Build 2026 同步推出 MAI-Code-1-Flash，整合至 GitHub Copilot 和 VS Code，两者均意在打破 OpenAI 与 Anthropic 在代码生成领域的垄断，AI 编程工具的企业采购成本有望进一步下降。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>内容来自 TechCrunch · VentureBeat · MIT Technology Review</div>
+  <div>Reuters · Bloomberg · The Verge · Wired</div>
+  <div style="margin-top:8px;opacity:0.6">页面每 30 分钟自动检查更新</div>
+</div>
+
+<div id="refresh-banner" onclick="location.reload()">🔄 发现新内容，点击刷新</div>
+
+<script>
+  // Auto-refresh check every 30 minutes
+  const GENERATED_AT = "21:51";
+  const CHECK_INTERVAL = 30 * 60 * 1000;
+
+  function checkForUpdates() {
+    // Check if the file has been modified by comparing last-modified header
+    fetch(location.href, { method: 'HEAD', cache: 'no-store' })
+      .then(r => {
+        const lastMod = r.headers.get('last-modified');
+        if (lastMod) {
+          const serverTime = new Date(lastMod).getTime();
+          const loadTime = window.__loadTime || Date.now();
+          if (serverTime > loadTime) {
+            document.getElementById('refresh-banner').style.display = 'block';
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
+  window.__loadTime = Date.now();
+
+  // For file:// protocol, just auto reload at next day 6am
+  if (location.protocol === 'file:') {
+    function msUntil6am() {
+      const now = new Date();
+      const next6am = new Date(now);
+      next6am.setHours(6, 0, 0, 0);
+      if (next6am <= now) next6am.setDate(next6am.getDate() + 1);
+      return next6am - now;
+    }
+    setTimeout(() => location.reload(), msUntil6am());
+  } else {
+    setInterval(checkForUpdates, CHECK_INTERVAL);
+  }
+
+  // Keyboard: press R to reload
+  document.addEventListener('keydown', e => {
+    if (e.key === 'r' && !e.ctrlKey && !e.metaKey) location.reload();
+  });
+</script>
+
+</body>
+</html>
