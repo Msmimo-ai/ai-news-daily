@@ -57,7 +57,6 @@ def render_card(item, index):
     tags_html = render_tags(item.get("tags", []))
     source = item.get("source", "")
     pub_time = item.get("pub_time", "")
-    meta = " · ".join(filter(None, [source, pub_time]))
     url = item.get("url", "#")
     summary = item.get("summary", "")
     title = item.get("title_zh", item.get("title", ""))
@@ -66,18 +65,21 @@ def render_card(item, index):
     if importance == "高":
         importance_badge = f'<span class="importance-badge" style="background:{accent}20;color:{accent}">🔥 重要</span>'
 
+    date_badge = f'<span class="pub-date">{pub_time}</span>' if pub_time else ""
+
     return f"""
     <article class="card" style="--accent:{accent}" onclick="window.open('{url}','_blank')">
       <div class="card-accent-bar" style="background:{accent}"></div>
       <div class="card-body">
         <div class="card-meta">
-          <span class="card-source">{meta}</span>
+          <span class="card-source">{source}</span>
           {importance_badge}
         </div>
         <h2 class="card-title">{title}</h2>
         <div class="card-tags">{tags_html}</div>
         <p class="card-summary">{summary}</p>
         <div class="card-footer">
+          {date_badge}
           <span class="read-more">阅读原文 →</span>
         </div>
       </div>
@@ -297,7 +299,16 @@ def generate_html(news_items, date_str, generated_at):
     margin-bottom: 12px;
   }}
 
-  .card-footer {{ display: flex; justify-content: flex-end; }}
+  .card-footer {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }}
+
+  .pub-date {{
+    font-size: 11px;
+    color: var(--text-secondary);
+  }}
 
   .read-more {{
     font-size: 12px;
