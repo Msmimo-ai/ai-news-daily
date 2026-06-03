@@ -66,9 +66,10 @@ def render_card(item, index):
         importance_badge = f'<span class="importance-badge" style="background:{accent}20;color:{accent}">🔥 重要</span>'
 
     date_badge = f'<span class="pub-date">{pub_time}</span>' if pub_time else ""
+    translate_url = f"https://translate.google.com/translate?sl=auto&tl=zh-CN&u={url}"
 
     return f"""
-    <article class="card" style="--accent:{accent}" onclick="window.open('{url}','_blank')">
+    <article class="card" style="--accent:{accent}">
       <div class="card-accent-bar" style="background:{accent}"></div>
       <div class="card-body">
         <div class="card-meta">
@@ -80,7 +81,10 @@ def render_card(item, index):
         <p class="card-summary">{summary}</p>
         <div class="card-footer">
           {date_badge}
-          <span class="read-more">阅读原文 →</span>
+          <div class="card-links">
+            <a class="btn-translate" href="{translate_url}" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="{url}" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
         </div>
       </div>
     </article>"""
@@ -303,19 +307,46 @@ def generate_html(news_items, date_str, generated_at):
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
   }}
 
   .pub-date {{
     font-size: 11px;
     color: var(--text-secondary);
+    flex-shrink: 0;
   }}
 
-  .read-more {{
+  .card-links {{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }}
+
+  .btn-translate {{
     font-size: 12px;
     font-weight: 600;
-    color: #3b82f6;
-    letter-spacing: 0.3px;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
   }}
+
+  .btn-translate:hover {{ background: #2563eb; }}
+
+  .btn-original {{
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }}
+
+  .btn-original:hover {{ color: var(--text); }}
 
   .footer {{
     text-align: center;
