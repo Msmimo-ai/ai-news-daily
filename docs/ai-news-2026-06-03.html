@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-06-03</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-06-03">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer { display: flex; justify-content: flex-end; }
+
+  .read-more {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3b82f6;
+    letter-spacing: 0.3px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-06-03</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 02:45</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://techcrunch.com/2026/06/02/uber-caps-employee-ai-spending-after-blowing-through-budget-in-four-months/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">Uber限制员工AI支出</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span></div>
+        <p class="card-summary">Uber公司由于四个月内超支而限制员工的AI支出，之前公司鼓励员工尽可能使用AI。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.theverge.com/news/939713/microsoft-scout-assistant-openclaw','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">微软推出Scout AI助手</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI助手</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Microsoft</span></div>
+        <p class="card-summary">微软推出Scout，一个基于OpenClaw的AI个人助手，集成到Microsoft 365应用中，帮助企业分配虚拟助手。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.theverge.com/tech/941517/google-phone-scammer-ai-impersonation','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">谷歌推出假电话检测功能</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">谷歌</span></div>
+        <p class="card-summary">谷歌推出假电话检测功能，保护用户免受AI深度伪造诈骗的侵害，识别可能的诈骗电话。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444" onclick="window.open('https://www.theverge.com/policy/941775/trump-ai-executive-order','_blank')">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">特朗普签署AI监管行政令</h2>
+        <div class="card-tags"><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI监管</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">美国</span></div>
+        <p class="card-summary">特朗普签署行政令，要求AI公司在发布高级模型前进行自愿的政府审查，促进安全创新和加强网络安全。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://techcrunch.com/2026/06/02/openai-launches-new-codex-tools-for-white-collar-work/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">OpenAI推出Codex工具</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">白领工作</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">OpenAI</span></div>
+        <p class="card-summary">OpenAI推出六个新的Codex工具，用于白领工作，包括数据分析、创意生产、销售、产品设计、股权投资和投资银行。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.theverge.com/news/941830/microsoft-project-solara-os-ai-agent-gadgets','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">微软推出Project Solara</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">智能设备</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">微软</span></div>
+        <p class="card-summary">微软推出Project Solara，一个为AI代理设备设计的操作系统，基于Android，用于创建智能设备。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.theverge.com/tech/941517/google-phone-scammer-ai-impersonation','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">谷歌推出AI电话保护</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">谷歌</span></div>
+        <p class="card-summary">谷歌推出AI电话保护功能，检测和防止AI深度伪造诈骗电话，保护用户安全。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">微软推出MAI-Thinking-1</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">高级推理</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">微软</span></div>
+        <p class="card-summary">微软推出MAI-Thinking-1，一个高级推理AI模型，用于开发智能应用和服务。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.technologyreview.com/2026/06/02/1138227/how-small-businesses-can-leverage-ai/','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">小企业如何利用AI</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">AI应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">小企业</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">MIT</span></div>
+        <p class="card-summary">MIT Technology Review文章介绍小企业如何利用AI技术，包括会计、设计、市场研究和产品开发等方面。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6" onclick="window.open('https://www.technologyreview.com/2026/06/02/1137827/rehumanizing-global-health-care-with-agentic-ai','_blank')">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review · 2026-06-02</span>
+          
+        </div>
+        <h2 class="card-title">全球医疗保健中的AI应用</h2>
+        <div class="card-tags"><span class="tag" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">医疗AI</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">全球医疗保健</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">MIT</span></div>
+        <p class="card-summary">MIT Technology Review文章讨论全球医疗保健中的AI应用，包括使用AI代理改善医疗服务等方面。</p>
+        <div class="card-footer">
+          <span class="read-more">阅读原文 →</span>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+</body>
+</html>
