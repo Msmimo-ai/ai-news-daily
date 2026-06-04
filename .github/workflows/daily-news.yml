@@ -2,8 +2,9 @@ name: AI News Daily
 
 on:
   schedule:
-    # 每天 22:00 UTC = 北京时间 06:00（UTC+8）
-    - cron: '0 22 * * *'
+    # 夏令时（3月~11月）：06:00 蒙特利尔 EDT = 10:00 UTC
+    # 冬令时（11月~3月）：06:00 蒙特利尔 EST = 11:00 UTC → 需手动改为 '0 11 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:  # 允许手动触发
 
 permissions:
@@ -38,4 +39,40 @@ jobs:
           git config user.email "actions@github.com"
           git add docs/
           git diff --cached --quiet || git commit -m "📰 AI 新闻日报 $(date +%Y-%m-%d)"
+          git push
+
+  # 失败时自动重试一次（30分钟后）
+  retry-on-failure:
+    runs-on: ubuntu-latest
+    needs: generate
+    if: failure()
+    timeout-minutes: 15
+
+    steps:
+      - name: Wait before retry
+        run: sleep 300
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install groq feedparser requests
+
+      - name: Retry generate news page
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PYTHONUTF8: "1"
+        run: python scripts/fetch_news.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "AI News Bot"
+          git config user.email "actions@github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "📰 AI 新闻日报 $(date +%Y-%m-%d)（重试）"
           git push
