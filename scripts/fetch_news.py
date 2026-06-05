@@ -153,28 +153,54 @@ def format_candidates(raw_news):
     return "\n\n".join(lines)
 
 
-def process_with_groq(raw_news):
+def clean_json_output(raw: str) -> str:
+    """清理 LLM 输出，去除 markdown 代码块标记"""
+    raw = raw.strip()
+    # 去除 ```json 或 ``` 开头
+    if raw.startswith("```"):
+        raw = raw[raw.index("\n")+1:] if "\n" in raw else raw[3:]
+    # 去除结尾的 ```
+    if raw.rstrip().endswith("```"):
+        raw = raw.rstrip()[:-3].rstrip()
+    return raw.strip()
+
+
+def process_with_groq(raw_news, retry=3):
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
     candidates_text = format_candidates(raw_news)
     prompt = FILTER_PROMPT.format(candidates=candidates_text)
 
-    print("调用 Groq API 处理新闻...")
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3,
-    )
-    raw_output = response.choices[0].message.content.strip()
+    for attempt in range(1, retry + 1):
+        try:
+            print(f"调用 Groq API（第{attempt}次）...")
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=4096,
+            )
+            raw_output = response.choices[0].message.content
+            raw_output = clean_json_output(raw_output)
 
-    # 去除可能的 markdown 代码块标记
-    if raw_output.startswith("```"):
-        raw_output = "\n".join(raw_output.split("\n")[1:])
-    if raw_output.endswith("```"):
-        raw_output = "\n".join(raw_output.split("\n")[:-1])
+            # 打印前200字方便调试
+            print(f"Groq 原始输出前200字: {raw_output[:200]}")
 
-    news_items = json.loads(raw_output)
-    print(f"筛选保留 {len(news_items)} 条新闻")
-    return news_items
+            news_items = json.loads(raw_output)
+            print(f"筛选保留 {len(news_items)} 条内容（含实操课题）")
+            return news_items
+
+        except json.JSONDecodeError as e:
+            print(f"JSON 解析失败（第{attempt}次）: {e}", file=sys.stderr)
+            print(f"原始输出: {raw_output[:500]}", file=sys.stderr)
+            if attempt == retry:
+                raise
+            time.sleep(5)
+
+        except Exception as e:
+            print(f"Groq API 调用失败（第{attempt}次）: {e}", file=sys.stderr)
+            if attempt == retry:
+                raise
+            time.sleep(10)
 
 
 def generate_html(news_items):
