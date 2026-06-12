@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-06-12</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-06-12">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn-translate {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-translate:hover { background: #2563eb; }
+
+  .btn-original {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .btn-original:hover { color: var(--text); }
+
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-06-12</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 12:46</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Theker 获 8500 万美元投资</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#f9731620;color:#f97316;border:1px solid #f9731640">机器人</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">投资</span></div>
+        <p class="card-summary">Theker 获 8500 万美元投资，用于开发工厂机器人。Theker 的机器人可以根据需要重新配置，不像传统的人形机器人。该公司的目标是开发出可以执行多种任务的机器人，减少生产线上的工人数量。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-12</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/11/theker-just-raised-85m-to-build-the-factory-robot-that-doesnt-specialize-in-anything/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/06/11/theker-just-raised-85m-to-build-the-factory-robot-that-doesnt-specialize-in-anything/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Prometheus 获 120 亿美元投资</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">投资</span></div>
+        <p class="card-summary">Prometheus 获 120 亿美元投资，用于开发人工通用工程师。该公司的目标是开发出可以自动化重型工程和药物设计的 AI 系统。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-12</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/06/11/jeff-bezoss-prometheus-raises-12b-to-build-an-artificial-general-engineer-for-the-physical-world/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/06/11/jeff-bezoss-prometheus-raises-12b-to-build-an-artificial-general-engineer-for-the-physical-world/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Deezer 推出 AI 音乐检测工具</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">音乐</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">检测</span></div>
+        <p class="card-summary">Deezer 推出 AI 音乐检测工具，可以检测出 Spotify、Apple Music 等平台上的 AI 生成音乐。该工具可以帮助用户识别出哪些音乐是由 AI 生成的。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-11</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/ai-artificial-intelligence/948153/deezer-ai-music-detector-spotify-apple" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/ai-artificial-intelligence/948153/deezer-ai-music-detector-spotify-apple" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Google DeepMind 关注多智能体交互</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">多智能体</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">安全</span></div>
+        <p class="card-summary">Google DeepMind 关注多智能体交互，担心当多个 AI 系统交互时可能会出现的问题。该公司正在研究如何确保多智能体系统的安全性和稳定性。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-11</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/06/11/1138794/google-deepmind-is-worried-about-what-happens-when-millions-of-agents-start-to-interact/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.technologyreview.com/2026/06/11/1138794/google-deepmind-is-worried-about-what-happens-when-millions-of-agents-start-to-interact/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Amazon 数据中心水耗达 25 亿加仑</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">数据中心</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">水耗</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">能耗</span></div>
+        <p class="card-summary">Amazon 数据中心水耗达 25 亿加仑，引发了人们对数据中心水资源消耗的关注。该公司正在努力减少数据中心的水耗和能耗。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-06-11</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/948534/amazon-data-centers-water-use" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/948534/amazon-data-centers-water-use" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Anthropic 为 Claude Fable 道歉</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">道歉</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">透明</span></div>
+        <p class="card-summary">Anthropic 为 Claude Fable 道歉，称该公司没有透明地披露其 AI 模型的限制。该公司正在努力改进其 AI 模型和用户体验。</p>
+        <div class="card-footer">
+          
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/ai-artificial-intelligence/948280/anthropic-claude-fable-invisible-distillation-guardrail" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/ai-artificial-intelligence/948280/anthropic-claude-fable-invisible-distillation-guardrail" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Microsoft 限制 Claude Fable 使用</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">限制</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">数据安全</span></div>
+        <p class="card-summary">Microsoft 限制 Claude Fable 使用，称该公司担心 Anthropic 的数据保留政策。该公司正在努力确保其员工的数据安全性。</p>
+        <div class="card-footer">
+          
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/report/947575/microsoft-claude-fable-5-restricted-internally" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/report/947575/microsoft-claude-fable-5-restricted-internally" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Google 将保存用户搜索历史</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">搜索</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">历史</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">人工智能</span></div>
+        <p class="card-summary">Google 将保存用户搜索历史，包括图像、音频和视频。该公司正在努力改进其搜索服务和 AI 模型。</p>
+        <div class="card-footer">
+          
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/947836/google-search-privacy-settings-images-audio" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/947836/google-search-privacy-settings-images-audio" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">中国大力发展核能</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">核能</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">能源</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">中国</span></div>
+        <p class="card-summary">中国大力发展核能，计划在未来几年内建设更多的核反应堆。该国正在努力减少其对化石燃料的依赖，提高能源安全性。</p>
+        <div class="card-footer">
+          
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/06/11/1138789/china-big-nuclear-reactors/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.technologyreview.com/2026/06/11/1138789/china-big-nuclear-reactors/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">使用 Copilot 生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">设备异常分析</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">报告生成</span></div>
+        <p class="card-summary">使用 Copilot 生成设备异常分析报告，可以帮助您快速识别设备问题并优化生产流程。该教程将指导您如何使用 Copilot 完成此任务。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共6步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第 1 步：打开 Copilot 并选择设备异常分析报告模板</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第 2 步：输入设备数据和异常信息</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第 3 步：配置 Copilot 的分析参数</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第 4 步：运行 Copilot 的分析算法</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第 5 步：查看和编辑分析报告</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第 6 步：导出分析报告为 Excel 或 Word 文档</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
