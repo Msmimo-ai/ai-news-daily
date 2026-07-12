@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-07-12</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-07-12">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn-translate {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-translate:hover { background: #2563eb; }
+
+  .btn-original {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .btn-original:hover { color: var(--text); }
+
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-07-12</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 11:04</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">SK Hynix完成历史最大外资IPO</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#8b5cf620;color:#8b5cf6;border:1px solid #8b5cf640">金融科技</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span></div>
+        <p class="card-summary">SK Hynix完成了历史上最大规模的外资IPO，筹资265亿美元。该公司被要求在美国建立新工厂，以满足AI芯片的需求。SK Hynix和三星电子是领先的芯片制造商，正在扩大其在美国的业务。该IPO是AI芯片行业的重大事件，表明了对AI技术的投资热情。SK Hynix计划利用IPO筹资扩大其在美国的业务，包括建立新工厂和招聘更多员工。该公司的扩张计划可能会对AI芯片行业产生重大影响，推动该行业的发展和创新。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/10/sk-hynix-raises-26-5b-in-the-biggest-foreign-ipo-in-us-history-is-urged-to-build-new-us-fabs/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/10/sk-hynix-raises-26-5b-in-the-biggest-foreign-ipo-in-us-history-is-urged-to-build-new-us-fabs/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Hugging Face CEO谈开源AI的重要性</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">开源AI</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">Hugging Face CEO Clem Delangue表示，开源AI对公司来说越来越重要。Hugging Face已经成长为一个类似GitHub的平台，AI开发者可以在这里分享和下载开源模型和数据集。Delangue认为，开源AI可以帮助公司更好地利用AI技术，减少对proprietary模型的依赖。Hugging Face的平台已经被许多公司使用，包括领先的科技公司。Delangue的言论表明，开源AI已经成为AI行业的重要趋势，公司需要重视开源AI的价值。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/10/hugging-faces-ceo-on-why-companies-are-done-renting-their-ai/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/10/hugging-faces-ceo-on-why-companies-are-done-renting-their-ai/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">苹果起诉OpenAI涉嫌窃取商业秘密</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">苹果公司起诉OpenAI，指控OpenAI窃取了苹果的商业秘密。苹果公司声称，OpenAI的高级领导人员，包括一名前苹果员工，指示员工窃取苹果的秘密。苹果公司要求OpenAI停止使用涉嫌窃取的技术，并要求赔偿。该案件表明，AI行业的竞争越来越激烈，公司需要保护自己的商业秘密。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/964350/apple-openai-lawsuit-trade-secrets" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/964350/apple-openai-lawsuit-trade-secrets" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Sunrun推出分布式AI数据中心</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">能源</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">物流自动化</span></div>
+        <p class="card-summary">Sunrun，一家太阳能和家庭能源存储公司，推出了一项分布式AI数据中心计划。该计划允许客户在家中安装Sunrun的计算单元，用于AI数据处理。Sunrun将向客户支付费用，以换取使用他们的家作为数据中心。该计划可能会改变AI数据处理的方式，减少对传统数据中心的依赖。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/ai-artificial-intelligence/963930/sunrun-distributed-ai-data-center" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/ai-artificial-intelligence/963930/sunrun-distributed-ai-data-center" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Meta关闭Instagram的AI深度伪造功能</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Meta关闭了Instagram的AI深度伪造功能，该功能允许用户生成AI图像。该功能引起了广泛的批评，许多用户认为它侵犯了他们的隐私。Meta表示，关闭该功能是因为用户的反馈，公司将继续改进其AI功能。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/964416/meta-instagram-ai-muse-image-deepfakes" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/964416/meta-instagram-ai-muse-image-deepfakes" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review</span>
+          
+        </div>
+        <h2 class="card-title">Anthropic发现Claude的隐藏空间</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Anthropic发现了Claude的隐藏空间，Claude是一个AI模型，能够解决复杂的问题。Anthropic的研究人员发现，Claude具有一个隐藏的空间，能够处理复杂的概念和关系。该发现可能会帮助改进AI模型的性能和安全性。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/07/10/1140316/the-download-anthropic-claude-hidden-space-openai-super-app/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.technologyreview.com/2026/07/10/1140316/the-download-anthropic-claude-hidden-space-openai-super-app/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">OpenAI发布新职位：家庭和照顾者产品经理</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span></div>
+        <p class="card-summary">OpenAI发布了一个新职位：家庭和照顾者产品经理。该职位负责开发和管理OpenAI的家庭和照顾者产品，包括ChatGPT。该职位表明OpenAI正在扩大其产品线，进入家庭和照顾者市场。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-11</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/11/openai-bets-on-families-as-chatgpt-goes-deeper-into-households/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/11/openai-bets-on-families-as-chatgpt-goes-deeper-into-households/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Hugging Face的CEO谈为什么公司不再租用AI</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">开源AI</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">Hugging Face的CEO Clem Delangue表示，公司不再租用AI，因为开源AI已经成为一种更好的选择。Delangue认为，开源AI可以帮助公司更好地利用AI技术，减少对proprietary模型的依赖。Hugging Face的平台已经被许多公司使用，包括领先的科技公司。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/10/hugging-faces-ceo-on-why-companies-are-done-renting-their-ai/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/10/hugging-faces-ceo-on-why-companies-are-done-renting-their-ai/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Instagram的Adam Mosseri谈AI内容</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">Instagram的Adam Mosseri表示，如果用户不喜欢AI内容，他们可以选择不显示它。Mosseri认为，AI内容可以为用户提供更多的选择和创造力。然而，Mosseri也表示，Instagram需要确保AI内容的安全性和合规性。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-10</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/963961/instagram-adam-mosseri-ai-feed-filters" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/963961/instagram-adam-mosseri-ai-feed-filters" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">用Copilot生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot实操</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">工程师必学</span></div>
+        <p class="card-summary">本教程将指导您使用Microsoft Copilot生成设备异常分析报告。Copilot是一种AI工具，可以帮助您自动化报告的生成，减少手动输入的工作量。通过本教程，您将学会如何使用Copilot快速生成设备异常分析报告，提高工作效率。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共8步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第1步：打开Microsoft Word，点击“文件”菜单，选择“新建”。</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第2步：在“新建”对话框中，选择“报告”模板，点击“创建”。</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第3步：在报告模板中，点击“插入”菜单，选择“Copilot”。</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第4步：在Copilot对话框中，选择“设备异常分析报告”模板，点击“生成”。</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第5步：Copilot将自动生成设备异常分析报告，包括设备信息、异常原因和建议。</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第6步：您可以根据需要修改报告的内容和格式。</span></li><li class="step-item"><span class="step-num">7</span><span class="step-text">第7步：点击“文件”菜单，选择“保存”以保存报告。</span></li><li class="step-item"><span class="step-num">8</span><span class="step-text">第8步：您可以将报告发送给相关人员或保存为记录。</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
