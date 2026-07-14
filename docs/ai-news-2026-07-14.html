@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-07-14</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-07-14">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn-translate {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-translate:hover { background: #2563eb; }
+
+  .btn-original {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .btn-original:hover { color: var(--text); }
+
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-07-14</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 11:14</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Anthropic开始为印度市场提供本地化定价</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">质量管理</span></div>
+        <p class="card-summary">Anthropic开始为其在印度的用户提供本地化定价，用户可以看到以印度卢比为单位的订阅计划。这表明Anthropic正在扩大其全球市场份额，尤其是在印度这样的大型市场中。对于流程工程师来说，了解Anthropic的定价策略和其在不同市场的发展，可以更好地评估其产品在各个地区的适用性和成本效益。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/13/anthropic-starts-localizing-claude-pricing-for-india-its-biggest-market-after-the-us/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/13/anthropic-starts-localizing-claude-pricing-for-india-its-biggest-market-after-the-us/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Waze新增AI驱动的功能和自定义更新</h2>
+        <div class="card-tags"><span class="tag" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">物流自动化</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">Waze新增了多项AI驱动的功能和自定义更新，包括由Google的Gemini AI助手提供支持的功能。这些更新旨在让用户能够更好地定制他们的行程，并获得更个性化的体验。对于流程工程师来说，了解Waze如何利用AI来改善用户体验，可以为他们在设计和优化流程时提供参考和灵感。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/13/waze-adds-new-ai-powered-features-and-customization-updates/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/13/waze-adds-new-ai-powered-features-and-customization-updates/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">PsiQuantum计划使用光构建大规模量子计算机</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">PsiQuantum宣布计划使用光构建大规模量子计算机，这可能会彻底改变计算领域。这种技术有望解决目前量子计算面临的多个挑战，包括可扩展性和稳定性。对于流程工程师来说，了解量子计算的最新发展，可以帮助他们更好地理解和应用这些技术来优化复杂的流程。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-14</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/07/14/1140356/psiquantum-plan-massive-quantum-computer-out-of-light/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.technologyreview.com/2026/07/14/1140356/psiquantum-plan-massive-quantum-computer-out-of-light/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">苹果公司对OpenAI提起诉讼，指控其窃取商业秘密</h2>
+        <div class="card-tags"><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">苹果公司对OpenAI提起诉讼，指控其窃取苹果的商业秘密。苹果公司声称，OpenAI的员工曾要求苹果员工提供未公开的产品信息和硬件样品。这一事件引发了人们对AI公司如何获取和使用敏感信息的关注。对于流程工程师来说，了解知识产权保护的重要性和如何防止商业秘密泄露至关重要。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/964843/apple-openai-lawsuit-wildest-claims" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/964843/apple-openai-lawsuit-wildest-claims" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">新州成为第一个实施数据中心建设禁令的州</h2>
+        <div class="card-tags"><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">新州成为第一个实施数据中心建设禁令的州，这一决定可能会对数据中心的建设和AI的发展产生影响。这种禁令可能会导致数据中心建设转移到其他地区，或者推动更高效和环保的数据中心设计。对于流程工程师来说，了解数据中心建设的趋势和挑战，可以帮助他们更好地设计和优化数据中心的运营流程。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-14</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/policy/965110/new-york-ai-data-center-moratorium" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/policy/965110/new-york-ai-data-center-moratorium" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Siri AI已经开始改变人们使用iPhone的方式</h2>
+        <div class="card-tags"><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span></div>
+        <p class="card-summary">Siri AI已经开始改变人们使用iPhone的方式，新的iOS版本中包含了多项Siri AI的更新。这些更新旨在让Siri更好地理解和响应用户的需求，提供更个性化的体验。对于流程工程师来说，了解Siri AI的发展和应用，可以为他们在设计和优化流程时提供参考和灵感。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/964714/siri-ai-public-beta-preview-ios-27-hands-on" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/964714/siri-ai-public-beta-preview-ios-27-hands-on" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">苹果公司的自驾车项目失败，但其AI芯片成果仍然值得关注</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">苹果公司的自驾车项目虽然失败，但其在AI芯片方面的成果仍然值得关注。苹果公司的AI芯片在自驾车项目中发挥了重要作用，其性能和效率可能会在其他领域得到应用。对于流程工程师来说，了解AI芯片的发展和应用，可以帮助他们更好地理解和应用这些技术来优化复杂的流程。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-12</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/964519/apple-silicon-self-driving-car-ai-m7-ultra" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/964519/apple-silicon-self-driving-car-ai-m7-ultra" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">Ars Technica AI</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">美国政府警告俄罗斯黑客正在针对路由器</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span></div>
+        <p class="card-summary">美国政府警告俄罗斯黑客正在针对路由器，用户需要保持警惕。这种攻击可能会导致网络安全漏洞，用户需要采取措施保护自己的网络安全。对于流程工程师来说，了解网络安全的重要性和如何防止黑客攻击至关重要。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://arstechnica.com/security/2026/07/the-us-government-warns-that-russia-state-hackers-are-coming-after-your-router/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://arstechnica.com/security/2026/07/the-us-government-warns-that-russia-state-hackers-are-coming-after-your-router/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">Ars Technica AI</span>
+          
+        </div>
+        <h2 class="card-title">现在，防御者也在使用提示注入技术</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">现在，防御者也在使用提示注入技术来防御黑客攻击。这种技术可以通过注入特定的提示来干扰黑客的攻击行为，防止他们造成损害。对于流程工程师来说，了解这种技术的发展和应用，可以帮助他们更好地理解和应用这些技术来优化网络安全流程。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-13</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://arstechnica.com/security/2026/07/now-defenders-are-embracing-the-prompt-injection-too/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://arstechnica.com/security/2026/07/now-defenders-are-embracing-the-prompt-injection-too/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">使用Copilot生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot实操</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">工程师必学</span></div>
+        <p class="card-summary">本教程将指导您如何使用Copilot生成设备异常分析报告。通过本教程，您将学习如何使用Copilot来分析设备数据，识别异常情况，并生成报告。这种技能对于流程工程师来说非常重要，因为他们需要能够快速分析设备数据，找出问题并优化流程。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共6步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第1步：打开Microsoft Excel并激活Copilot插件——输入=COPILOT()函数——激活Copilot</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第2步：输入设备数据——粘贴设备数据到Excel表格中——确保数据格式正确</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第3步：使用Copilot分析数据——输入=ANALYZE()函数——选择设备数据范围</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第4步：识别异常情况——使用Copilot的异常检测功能——设置阈值和敏感度</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第5步：生成报告——使用Copilot的报告生成功能——选择报告模板和数据范围</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第6步：自定义报告——使用Copilot的报告编辑功能——添加标题、图表和注释</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
