@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-07-18</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-07-18">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn-translate {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-translate:hover { background: #2563eb; }
+
+  .btn-original {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .btn-original:hover { color: var(--text); }
+
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-07-18</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 10:53</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">Databricks 达到 1880 亿美元估值</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">Databricks 已将其形象重塑为一家 AI 公司，并发表了关于使用开放权重 AI 模型进行编码的成本节约研究。该公司的估值已达到 1880 亿美元，进一步巩固了其在 AI 领域的领先地位。这种转变表明了 Databricks 在 AI 领域的雄心壮志及其对开源权重 AI 模型的重视。作为一家领先的数据和 AI 公司，Databricks 的成功对整个行业具有重要意义，尤其是在数据处理和 AI 应用方面。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/17/databricks-hits-188b-valuation-extending-its-run-as-ais-favorite-second-act/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/17/databricks-hits-188b-valuation-extending-its-run-as-ais-favorite-second-act/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Agility Robotics 在特斯拉后院开设新训练中心</h2>
+        <div class="card-tags"><span class="tag" style="background:#f9731620;color:#f97316;border:1px solid #f9731640">机器人</span><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">物流自动化</span></div>
+        <p class="card-summary">Agility Robotics 正在特斯拉的后院——加利福尼亚州弗里蒙特开设新的 Digit 机器人训练中心。这标志着该公司在机器人技术和自动化领域的进一步扩张，尤其是在制造业和物流领域。这种发展对提高生产效率和降低成本具有重要意义，表明了机器人技术在工业场景中的广阔应用前景。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/17/agility-robotics-plants-its-flag-in-teslas-backyard/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/17/agility-robotics-plants-its-flag-in-teslas-backyard/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">AI 驱动的内存紧缩冲击印度智能手机市场</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span></div>
+        <p class="card-summary">AI 的快速发展对印度智能手机市场产生了重大影响，导致内存需求激增和供应紧张。这一变化不仅反映了消费者对更高性能设备的需求，也推动了整个行业向更高效的内存解决方案转变。这种转变对智能手机制造商和供应链具有重要意义，需要他们适应新的市场需求和技术进步。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/17/ai-driven-memory-crunch-jolts-indias-smartphone-market/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/17/ai-driven-memory-crunch-jolts-indias-smartphone-market/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">苹果对 OpenAI 的诉讼可能会破坏后者的 IPO 计划</h2>
+        <div class="card-tags"><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">苹果公司对 OpenAI 的诉讼可能会对后者的 IPO 计划产生重大影响。这种法律纠纷不仅反映了两家公司在 AI 领域的竞争，也涉及到知识产权保护和企业间的合作与竞争问题。对此，投资者和行业观察者都在密切关注着这一事件的发展，试图了解它将如何影响 AI 行业的未来。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/video/how-apples-big-lawsuit-could-disrupt-openais-ipo-plans/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/video/how-apples-big-lawsuit-could-disrupt-openais-ipo-plans/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Patreon 开始阻止 AI 机器人爬取内容</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">内容保护</span></div>
+        <p class="card-summary">Patreon 正在加强对 AI 机器人爬取内容的防范，通过与 Cloudflare 合作，阻止未经授权的 AI 模型训练。这种措施旨在保护创作者的内容权益，防止未经许可的 AI 训练行为。随着 AI 技术的发展，内容保护和 AI伦理问题变得愈发重要，Patreon 的举动是行业自律和内容保护的一种积极尝试。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/17/patreon-stops-asking-ai-bots-not-to-scrape-and-starts-blocking-them/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/17/patreon-stops-asking-ai-bots-not-to-scrape-and-starts-blocking-them/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">GPU 首次投资者转向推理芯片</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">一项 4 亿美元的芯片支持贷款协议标志着 AI 基础设施交易的新浪潮。GPU 首次投资者开始转向推理芯片，这反映了 AI 计算需求的转变和对更高效推理能力的需求。这种转变对 AI 硬件行业具有重要意义，预示着未来 AI 计算将更加高效和多样化。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/17/why-the-first-gpu-financiers-are-turning-to-inference-chips-in-a-400-million-deal/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/17/why-the-first-gpu-financiers-are-turning-to-inference-chips-in-a-400-million-deal/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">VentureBeat</span>
+          
+        </div>
+        <h2 class="card-title">企业 AI 计算缺口日益扩大</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#fb923c20;color:#fb923c;border:1px solid #fb923c40">数据分析</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">企业在购买 AI 基础设施的同时，却难以衡量其成本效益。这种计算缺口反映了企业在 AI 投资方面的盲目性和对 AI 技术的不充分理解。解决这一问题需要企业更加理性地评估 AI 投资的价值和潜在风险，避免盲目跟风和资源浪费。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-16</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://venturebeat.com/ai/the-ai-compute-gap-enterprises-are-buying-infrastructure-faster-than-they-can-measure-what-it-costs" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://venturebeat.com/ai/the-ai-compute-gap-enterprises-are-buying-infrastructure-faster-than-they-can-measure-what-it-costs" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">VentureBeat</span>
+          
+        </div>
+        <h2 class="card-title">AI 代理安全缺口日益显现</h2>
+        <div class="card-tags"><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#06b6d420;color:#06b6d4;border:1px solid #06b6d440">智能办公</span></div>
+        <p class="card-summary">超过半数企业已经经历过 AI 代理安全事件，且大多数企业仍允许代理共享凭证。这种安全缺口凸显了企业在 AI 代理安全方面的忽视和漏洞。为了解决这一问题，企业需要加强对 AI 代理的安全审查和监管，确保代理的行为符合安全标准和企业政策。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-16</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://venturebeat.com/ai/the-agent-security-gap-54-of-enterprises-have-already-had-an-ai-agent-incident-and-most-still-let-agents-share-credentials" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://venturebeat.com/ai/the-agent-security-gap-54-of-enterprises-have-already-had-an-ai-agent-incident-and-most-still-let-agents-share-credentials" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">TikTok 测试 AI 相似度检测工具</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">内容保护</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">社交媒体</span></div>
+        <p class="card-summary">TikTok 正在测试一项可选工具，用于检测和报告 AI 生成的内容相似度。这种工具的推出反映了社交媒体平台对内容真实性和原创性的重视，也是对 AI 生成内容可能带来的挑战的回应。通过这种工具，TikTok 希望能够更好地维护平台的内容质量和用户体验。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-17</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/tech/967486/tiktok-ai-likeness-detection-tool" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/tech/967486/tiktok-ai-likeness-detection-tool" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">使用 Copilot 生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot 实操</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">工程师必学</span></div>
+        <p class="card-summary">本教程将指导您如何使用 Microsoft Copilot 快速生成设备异常分析报告。通过这一过程，您将学会如何利用 Copilot 的强大功能自动化报告生成，节省时间和提高工作效率。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共6步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第 1 步：打开 Microsoft Excel 并激活 Copilot 功能</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第 2 步：输入设备异常数据，包括设备名称、异常时间和异常类型</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第 3 步：使用 Copilot 的数据分析功能生成设备异常统计图表</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第 4 步：使用 Copilot 的自然语言处理功能生成异常分析报告</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第 5 步：自定义报告的格式和内容以满足您的需求</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第 6 步：保存报告并与团队成员共享</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
