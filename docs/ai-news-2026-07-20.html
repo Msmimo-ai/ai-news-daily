@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI 新闻日报 · 2026-07-20</title>
+<meta name="description" content="AI 职场与工业应用每日新闻聚合 2026-07-20">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --max-width: 480px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 16px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .header-logo span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .header-date {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .update-bar {
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .update-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .news-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-accent-bar { height: 3px; width: 100%; }
+
+  .card-body { padding: 14px 16px 16px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .importance-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn-translate {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-translate:hover { background: #2563eb; }
+
+  .btn-original {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .btn-original:hover { color: var(--text); }
+
+  /* 实操课题卡片 */
+  .tutorial-card { border: 2px solid #7c3aed40; }
+
+  .steps-section { margin-top: 14px; }
+
+  .steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #7c3aed10;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  .steps-header:hover { background: #7c3aed20; }
+
+  .chevron { transition: transform 0.2s; font-size: 10px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .steps-list {
+    display: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .steps-list.open { display: flex; }
+
+  .step-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid #7c3aed40;
+  }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text { flex: 1; }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 20px 16px 0;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">⚡ <span>AI 新闻日报</span></div>
+    <div class="header-meta">
+      <div class="header-date">2026-07-20</div>
+      <div>今日精选 <span class="news-count">10 条</span></div>
+    </div>
+  </div>
+  <div class="update-bar">
+    <div class="update-dot"></div>
+    <span>AI 职场与工业应用 · 更新于 12:06</span>
+  </div>
+</header>
+
+<main>
+
+    <article class="card" style="--accent:#ef4444">
+      <div class="card-accent-bar" style="background:#ef4444"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          <span class="importance-badge" style="background:#ef444420;color:#ef4444">🔥 重要</span>
+        </div>
+        <h2 class="card-title">中国公司挑战美国AI霸主地位</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">中国领先的AI公司正在加大对硅谷的压力，Moonshot和阿里巴巴推出了他们声称可以与OpenAI和Anthropic的最佳模型相媲美的模型，但成本仅为后者的几分之一。这些快速发布的模型表明美国的AI主导地位可能面临挑战。中国公司的这一举动可能会改变全球AI市场的格局，并对美国的AI行业产生重大影响。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-20</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">MIT Technology Review</span>
+          
+        </div>
+        <h2 class="card-title">AI在招聘中可能形成偏见</h2>
+        <div class="card-tags"><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">下次你申请工作时，AI可能会在任何人之前筛选你的简历。但是，有理由质疑AI是否会公平地判断你。研究人员已经知道，LLM从其训练数据中获取人类偏见。新的研究表明，AI在招聘中可能形成的偏见比人类更严重，这对企业和求职者都有重要的影响。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-20</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.technologyreview.com/2026/07/20/1140655/ai-biases-hiring-humans/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.technologyreview.com/2026/07/20/1140655/ai-biases-hiring-humans/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">非营利组织Current AI致力于建设全球AI网络</h2>
+        <div class="card-tags"><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#ef444420;color:#ef4444;border:1px solid #ef444440">政策监管</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">非营利组织Current AI正在努力建设一个全球的AI网络，旨在让所有人都能免费使用AI。该组织已经在设备、AI聊天和其他领域取得了显著的进展。Current AI的目标是让AI惠及所有人，减少AI应用中的文化差异。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-19</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/19/nonprofit-current-ai-is-racing-to-build-the-world-wide-web-of-ai-free-for-all/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/19/nonprofit-current-ai-is-racing-to-build-the-world-wide-web-of-ai-free-for-all/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">中国公司Moonshot发布新版Kimi模型</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">中国公司Moonshot发布了新版的Kimi模型，这一举动引发了人们对“全AI共产主义”的担忧。Kimi模型的发布可能会对全球AI市场产生重大影响，并挑战现有的AI主导地位。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-18</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/18/kimi-threat-or-menace/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/18/kimi-threat-or-menace/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">Dave Eggers认为ChatGPT正在“沉默整个一代人”</h2>
+        <div class="card-tags"><span class="tag" style="background:#a78bfa20;color:#a78bfa;border:1px solid #a78bfa40">人力资源</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#f43f5e20;color:#f43f5e;border:1px solid #f43f5e40">安全合规</span></div>
+        <p class="card-summary">作者Dave Eggers在给OpenAI员工的演讲中表示，ChatGPT正在“沉默整个一代人”。他认为，ChatGPT的出现可能会对写作和创造力产生负面影响，导致年轻一代缺乏写作和创造力的机会。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-18</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/ai-artificial-intelligence/967630/dave-eggers-openai-chatgpt-silencing-an-entire-generation" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/ai-artificial-intelligence/967630/dave-eggers-openai-chatgpt-silencing-an-entire-generation" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">The Verge</span>
+          
+        </div>
+        <h2 class="card-title">AI音乐创作平台Suno发布新歌曲</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">娱乐</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">AI音乐创作平台Suno发布了一首新歌曲，这首歌曲的创作过程中使用了AI算法。虽然AI音乐创作平台Suno的输出通常被认为是枯燥的，但这首新歌曲却引发了人们对AI在音乐创作中的作用的讨论。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-19</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://www.theverge.com/entertainment/967678/1010benja-semiramis-dream-suno-ai-music" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://www.theverge.com/entertainment/967678/1010benja-semiramis-dream-suno-ai-music" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">Jensen Huang访问日本并达成多项协议</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">Jensen Huang访问日本并达成多项协议，这些协议涵盖了日本的整个科技生态系统。这些协议可能会对日本的科技行业产生重大影响，并促进中美之间的科技合作。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-19</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/19/what-to-watch-for-after-jensen-huangs-japan-visit/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/19/what-to-watch-for-after-jensen-huangs-japan-visit/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">苹果公司起诉OpenAI可能会影响其硬件计划</h2>
+        <div class="card-tags"><span class="tag" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640">制造业</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#84cc1620;color:#84cc16;border:1px solid #84cc1640">供应链</span></div>
+        <p class="card-summary">苹果公司起诉OpenAI可能会影响其硬件计划，人们正在讨论这一诉讼对OpenAI的影响。苹果公司的诉讼可能会对OpenAI的硬件计划产生重大影响，并挑战其在AI市场的主导地位。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-19</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/19/can-an-apple-lawsuit-derail-openais-hardware-plans/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/19/can-an-apple-lawsuit-derail-openais-hardware-plans/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#3b82f6">
+      <div class="card-accent-bar" style="background:#3b82f6"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source">TechCrunch</span>
+          
+        </div>
+        <h2 class="card-title">导演Christopher Nolan认为AI是“特洛伊木马”</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">娱乐</span><span class="tag" style="background:#ec489920;color:#ec4899;border:1px solid #ec489940">大模型应用</span><span class="tag" style="background:#4ade8020;color:#4ade80;border:1px solid #4ade8040">代码生成</span></div>
+        <p class="card-summary">导演Christopher Nolan认为AI是“特洛伊木马”，他对AI的看法引发了人们的讨论。Christopher Nolan的言论可能会对人们对AI的看法产生影响，并挑战AI在各个领域的应用。</p>
+        <div class="card-footer">
+          <span class="pub-date">2026-07-19</span>
+          <div class="card-links">
+            <a class="btn-translate" href="https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://techcrunch.com/2026/07/19/odyssey-director-christopher-nolan-calls-ai-an-obvious-trojan-horse/" target="_blank" onclick="event.stopPropagation()">🌐 中文阅读</a>
+            <a class="btn-original" href="https://techcrunch.com/2026/07/19/odyssey-director-christopher-nolan-calls-ai-an-obvious-trojan-horse/" target="_blank" onclick="event.stopPropagation()">原文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card tutorial-card">
+      <div class="card-accent-bar" style="background:linear-gradient(90deg,#7c3aed,#2563eb)"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-source" style="color:#7c3aed;font-weight:700">🛠 本期实操课题</span>
+          <span class="importance-badge" style="background:#7c3aed20;color:#7c3aed">动手做</span>
+        </div>
+        <h2 class="card-title">用Copilot生成设备异常分析报告</h2>
+        <div class="card-tags"><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">Copilot实操</span><span class="tag" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">工程师必学</span></div>
+        <p class="card-summary">本教程将指导您使用Copilot生成设备异常分析报告。通过本教程，您将学会如何使用Copilot快速生成设备异常分析报告，并提高工作效率。</p>
+        <div class="steps-section">
+          <div class="steps-header" onclick="toggleSteps(this)">
+            <span>📋 完整操作步骤（共6步）</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item"><span class="step-num">1</span><span class="step-text">第1步：打开Microsoft Excel并创建一个新表格——输入设备异常数据——得到一个空白表格</span></li><li class="step-item"><span class="step-num">2</span><span class="step-text">第2步：打开Copilot并选择“数据分析”功能——输入设备异常数据——得到数据分析结果</span></li><li class="step-item"><span class="step-num">3</span><span class="step-text">第3步：使用Copilot生成设备异常分析报告——输入报告标题和内容——得到设备异常分析报告</span></li><li class="step-item"><span class="step-num">4</span><span class="step-text">第4步：保存设备异常分析报告——输入报告文件名——得到保存的报告文件</span></li><li class="step-item"><span class="step-num">5</span><span class="step-text">第5步：打开设备异常分析报告并查看结果——输入报告查看命令——得到报告查看结果</span></li><li class="step-item"><span class="step-num">6</span><span class="step-text">第6步：使用Copilot更新设备异常分析报告——输入更新命令——得到更新的报告</span></li>
+          </ol>
+        </div>
+        <div class="card-footer" style="margin-top:12px">
+          <span class="pub-date">预计用时 30 分钟</span>
+          <a class="btn-translate" href="https://copilot.microsoft.com" target="_blank" style="background:#7c3aed">开始实操 →</a>
+        </div>
+      </div>
+    </article>
+</main>
+
+<div class="footer">
+  <div>来源：TechCrunch · VentureBeat · MIT Technology Review · Reuters · Bloomberg</div>
+  <div style="margin-top:8px"><a href="index.html">← 历史归档</a></div>
+  <div style="margin-top:8px;opacity:0.5">由 Claude AI 自动生成 · 每天 06:00 更新</div>
+</div>
+
+<script>
+  function toggleSteps(header) {
+    const list = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    list.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
